@@ -37,9 +37,9 @@ with lib;
 
     # Configurations for packages
     ../pkgs/bash/config.nix
+    ../pkgs/xserver/config.nix
   ];
 
-  # Set your time zone.
   time.timeZone = "Europe/Copenhagen";
   networking = {
     hostName = "midgard";
@@ -49,8 +49,6 @@ with lib;
     nameservers = [ "192.168.0.185" ];
   };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
 
   boot = {
     # Disable console blanking after being idle
