@@ -1,0 +1,4 @@
+* NixOS Configuration file
+  - ~pkgs/~: Configurations for packages.
+  - ~users/~: Setups for users.
+  - ~machines/~: Each file should correspond to a machine, important users, packages, etc.. Change the import statement in ~configuration.nix~ in order to use another machine.
