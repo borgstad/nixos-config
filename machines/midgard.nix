@@ -1,16 +1,3 @@
-# { config, pkgs, ... }:
-
-# {
-#   import =
-#     [
-#       emacs
-#       firefox
-#     ];
-
-# }
-
-
-
 { config, lib, pkgs, ... }:
 
 with lib;
