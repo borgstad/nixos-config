@@ -2,8 +2,6 @@
 
 with lib;
 
-#let secrets = import ./secrets.nix;
-
 {
   environment.systemPackages = with pkgs; [
     alacritty
@@ -19,6 +17,7 @@ with lib;
     htop
     nix-prefetch-scripts
     openssl
+    python37
     stdenv
     strace
     sudo
@@ -38,6 +37,7 @@ with lib;
     # Configurations for packages
     ../pkgs/bash/config.nix
     ../pkgs/xserver/config.nix
+    ../pkgs/syncthing/config.nix    
   ];
 
   time.timeZone = "Europe/Copenhagen";
