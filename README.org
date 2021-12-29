@@ -1,4 +1,21 @@
-* NixOS Configuration file
-  - ~pkgs/~: Configurations for packages.
-  - ~users/~: Setups for users.
-  - ~machines/~: Each file should correspond to a machine, important users, packages, etc.. Change the import statement in ~configuration.nix~ in order to use another machine.
+# -*- fill-column: 75; mode: org; eval: (auto-fill-mode); -*-
+* Nix configuration
+  This configuration mono-repository contains configs for several nix machines.
+** Structure
+   The file ~configuration.nix~ is not version controlled and contains a
+   default implementation. This is the file that should be edited per
+   machine. It contains only two configurations, namely setting timezone
+   and systemversion. These configurations are left here, since each
+   machine, until now, created from the same USB and located in the same
+   country. More importantly, the configuration file contains a top-level
+   `imports` statement, which imports:
+   - machines: Each machine should have two configurations containing
+     network information, and hardware-config. These should be more or less
+     static.
+   - users: Which users to create on the machine.
+   - profile: Specifices the type of machine instance to run. An exmaple is
+     a server profile, which runs an SSH server, Matrix/Synapse server.
+     This could be identical across machines, but may not nescessarily be.
+     Fx. it be beneficial to have two PCs with identical setups, whereas
+     server setups, or profiles, might differ.
+
