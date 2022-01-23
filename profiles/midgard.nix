@@ -49,6 +49,17 @@ with lib;
     nameservers = [ "192.168.0.185" ];
   };
 
+  services.borgstadSyncthing = {
+    enable = true;
+    user = "borgstad";
+  };
+
+  services.borgstadUser = {
+    user = "borgstad";
+    isAdmin = true;
+    hashedPasswordPath = "";
+    sshAuthKeysPath = [ "" ];
+  };
 
   boot = {
     # Disable console blanking after being idle
