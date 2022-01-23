@@ -31,41 +31,23 @@ with lib;
   ];
   
   imports = [
-    # Users on the machine
-    ../users/midgard.nix
-
-    # Configurations for packages
-    ../pkgs/bash/config.nix
-    ../pkgs/xserver/config.nix
-    ../pkgs/syncthing/config.nix    
+    ../machines/midgard/hardware-configuration.nix
+    ../machines/midgard/network.nix
+    ../pkgs/bash
+    ../pkgs/ssh-server
+    ../pkgs/xserver
+    ../modules/syncthing
+    ../modules/users/standard-user.nix
   ];
-
-  time.timeZone = "Europe/Copenhagen";
-  networking = {
-    hostName = "midgard";
-    useDHCP = false;
-    interfaces.enp0s25.useDHCP = true;
-    interfaces.wlp3s0.useDHCP = true;
-    nameservers = [ "192.168.0.185" ];
-  };
 
   services.borgstadSyncthing = {
     enable = true;
-    user = "borgstad";
+    user = "midgard";
   };
 
   services.borgstadUser = {
-    user = "borgstad";
+    user = "midgard";
     isAdmin = true;
     hashedPasswordPath = "";
-    sshAuthKeysPath = [ "" ];
-  };
-
-  boot = {
-    # Disable console blanking after being idle
-    kernelParams = ["consoleblank=0"];
-
-    # clean /tmp on startup
-    cleanTmpDir = true;
   };
 }

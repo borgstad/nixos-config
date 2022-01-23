@@ -12,6 +12,11 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.cleanTmpDir = true;
+  
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only  
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8552af7f-31d1-45d6-b3fa-44b540185fb7";
