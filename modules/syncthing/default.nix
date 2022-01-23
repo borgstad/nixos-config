@@ -21,6 +21,8 @@ in
         configDir = "/home/${cfg.user}/.config/syncthing";
         devices = {
           galaxy21s = {
+            # Samsung galaxy as introduction.
+            # TODO: Add Jotunheim as inroducer.
             id = "J5RIDPG-F6L7TKG-XYZ6SLL-3VZGRED-EJQ43TJ-MAHUPD3-6XRFRQL-H75YOQP";
             introducer = true;
             autoAcceptFolders = true;

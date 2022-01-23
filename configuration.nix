@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ./profiles/ymir-server.nix
+      ./profiles/insert-your-user-here!
     ];
 
   time.timeZone = "Europe/Copenhagen";
