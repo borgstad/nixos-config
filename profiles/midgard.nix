@@ -32,22 +32,21 @@ with lib;
   
   imports = [
     # Users on the machine
-    ../users/midgard.nix
-
+    ../machines/midgard/hardware-configuration.nix
+    ../machines/midgard/network.nix
     # Configurations for packages
-    ../pkgs/bash/config.nix
-    ../pkgs/xserver/config.nix
-    ../pkgs/syncthing/config.nix    
+    ../pkgs/bash
+    ../pkgs/xserver
+    # ../pkgs/syncthing/config.nix
+    ../modules/users/standard-user.nix
   ];
-
-  time.timeZone = "Europe/Copenhagen";
-  services.borgstadSyncthing = {
-    enable = true;
-    user = "borgstad";
-  };
+  # services.borgstadSyncthing = {
+  #   enable = true;
+  #   user = "midgard";
+  # };
 
   services.borgstadUser = {
-    user = "borgstad";
+    user = "midgard";
     isAdmin = true;
     hashedPasswordPath = "";
     sshAuthKeysPath = [ "" ];
