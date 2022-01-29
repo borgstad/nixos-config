@@ -23,7 +23,7 @@ in
   };
 
   config = {
-    users.extraUsers.ymir = {
+    users.extraUsers.${cfg.user} = {
       description = "Mega server user";
       extraGroups = [
         "networkmanager"
@@ -45,7 +45,7 @@ in
         # Configure various dotfiles.
         dotfiles = stringAfter [ "users" ]
           ''
-      cd /home/ymir
+      cd /home/${cfg.user}
     '';
       };
   };

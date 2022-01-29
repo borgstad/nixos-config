@@ -15,12 +15,13 @@
   boot = {
     # Disable console blanking after being idle
     kernelParams = ["consoleblank=0"];
-
     # clean /tmp on startup
     cleanTmpDir = true;
   };
-  
-  
+
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only  
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8552af7f-31d1-45d6-b3fa-44b540185fb7";
