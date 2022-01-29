@@ -37,13 +37,13 @@ with lib;
     # Configurations for packages
     ../pkgs/bash
     ../pkgs/xserver
-    # ../pkgs/syncthing/config.nix
+    ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
-  # services.borgstadSyncthing = {
-  #   enable = true;
-  #   user = "midgard";
-  # };
+  services.borgstadSyncthing = {
+    enable = true;
+    user = "midgard";
+  };
 
   services.borgstadUser = {
     user = "midgard";
