@@ -12,6 +12,15 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot = {
+    # Disable console blanking after being idle
+    kernelParams = ["consoleblank=0"];
+
+    # clean /tmp on startup
+    cleanTmpDir = true;
+  };
+  
+  
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8552af7f-31d1-45d6-b3fa-44b540185fb7";
