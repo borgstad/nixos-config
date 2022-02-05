@@ -37,6 +37,7 @@ with lib;
     ../machines/jotunheim/network.nix
     ../pkgs/bash
     ../pkgs/ssh-server
+    ../pkgs/synapse
     ../pkgs/xserver
     ../pkgs/plex
     ../pkgs/deluge
