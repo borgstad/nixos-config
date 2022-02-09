@@ -38,9 +38,13 @@ with lib;
     ../pkgs/bash
     ../pkgs/ssh-server
     ../pkgs/xserver
+    ../pkgs/plex
+    ../pkgs/deluge
     ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
+  nixpkgs.config.allowUnfree = true;
+  
   services.borgstadSyncthing = {
     enable = true;
     user = "ymir";

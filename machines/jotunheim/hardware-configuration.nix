@@ -29,6 +29,11 @@
       fsType = "zfs";
     };
 
+  fileSystems."/plex" =
+    { device = "rpool/plex";
+      fsType = "zfs";
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/AC5F-11B6";
       fsType = "vfat";
