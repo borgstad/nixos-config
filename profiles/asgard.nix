@@ -50,6 +50,5 @@ with lib;
     isAdmin = true;
     hashedPasswordPath = "";
     sshAuthKeysPath = [ "" ];
-    description = "Odin!";
   };
 }
