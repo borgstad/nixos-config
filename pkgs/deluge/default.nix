@@ -6,5 +6,7 @@
     web.enable = true;
     web.openFirewall = true;
     dataDir = "/plex/videos";
+    user = "plex";
+    group = "plex";
   };
 }

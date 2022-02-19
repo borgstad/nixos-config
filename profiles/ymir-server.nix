@@ -3,6 +3,7 @@
 with lib;
   # Enable the X11 windowing system.
 
+
 {
   environment.systemPackages = with pkgs; [
     alacritty
@@ -56,4 +57,19 @@ with lib;
     hashedPasswordPath = "";
     sshAuthKeysPath = [ "" ];
   };
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+        if (action.id == "org.freedesktop.login1.suspend" ||
+            action.id == "org.freedesktop.login1.suspend-multiple-sessions" ||
+            action.id == "org.freedesktop.login1.hibernate" ||
+            action.id == "org.freedesktop.login1.hibernate-multiple-sessions")
+        {
+            return polkit.Result.NO;
+        }
+    });
+  '';
 }

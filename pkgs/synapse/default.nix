@@ -29,7 +29,4 @@
     enableACME = false;
     root = "/var/www/test";
   };
-
 }
-
-  
