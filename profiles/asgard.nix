@@ -12,6 +12,7 @@ with lib;
     ctags
     curl
     element-desktop
+    emacs
     firefox
     gitAndTools.gitFull
     gnumake
@@ -37,7 +38,7 @@ with lib;
     ../machines/asgard/network.nix
     ../pkgs/bash
     ../pkgs/xserver
-    ../pkgs/emacs
+    # ../pkgs/emacs
     ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
@@ -45,6 +46,7 @@ with lib;
     enable = true;
     user = "odin";
   };
+  
   services.borgstadUser = {
     user = "odin";
     isAdmin = true;
