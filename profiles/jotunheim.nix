@@ -32,21 +32,23 @@ with lib;
     wget
     zip
   ];
-  
+
   imports = [
     ../machines/jotunheim/hardware-configuration.nix
     ../machines/jotunheim/network.nix
     ../pkgs/bash
     ../pkgs/ssh-server
+    ../pkgs/my-pages
     ../pkgs/synapse
     ../pkgs/xserver
     ../pkgs/plex
     ../pkgs/deluge
+    ../pkgs/grafana
     ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
   nixpkgs.config.allowUnfree = true;
-  
+
   services.borgstadSyncthing = {
     enable = true;
     user = "ymir";
