@@ -2,6 +2,8 @@
 
 {
   users.groups.matrixborg.members = [ "nginx" "matrix-synapse" ];
+  users.groups.turnserver.members = [ "nginx" "turnserver" "matrix-synapse" ];
+
   security.acme.certs = {
     "matrix.borgstad.dk" = {
       group = "matrixborg";
@@ -17,80 +19,112 @@
         proxyPass = "http://localhost:8008";
       };
     };
+    virtualHosts = {
+      "turn.borgstad.dk" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:3478";
+        };
+      };
+    };
+
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 8448 ];
   security.acme = {
     acceptTerms = true;
-    email = "aborgstad@gmail.com";
   };
-  networking.firewall.allowedUDPPorts = [ 5349 5350 3478 3479];
 
-  services.coturn = {
+  services.coturn = with config.security.acme.certs."turn.borgstad.dk"; {
     enable = true;
+    use-auth-secret = false;
+    static-auth-secret = builtins.readFile ./auth-secret;
+    realm = "turn.borgstad.dk";
+    relay-ips = [
+      "192.168.0.140"
+    ];
+    cli-password = builtins.readFile ./cli-password;
+    no-tcp-relay = true;
+    extraConfig = "
+      cipher-list=\"HIGH\"
+    ";
+    secure-stun = true;
+    cert = config.security.acme.certs."turn.borgstad.dk".directory + "/fullchain.pem";
+    pkey = config.security.acme.certs."turn.borgstad.dk".directory + "/key.pem";
     min-port = 49000;
     max-port = 50000;
-    cli-password = "adslkjfhwiuhiuhiu345987adsfk";
-    use-auth-secret = true;
-    static-auth-secret = "I2QdtTZ1p8nI7CF4zo8UpbgNq9cTp79L6PxPAml8rrvUUw8yr9q6RzoPr10DGv5F";
-    realm = "turn.matrix.borgstad.dk";
-    no-tcp-relay = true;
-    no-tls = true;
-    no-dtls = true;
-    extraConfig = ''
-      user-quota=12
-      total-quota=1200
-      denied-peer-ip=10.0.0.0-10.255.255.255
-      denied-peer-ip=192.168.0.0-192.168.255.255
-      denied-peer-ip=172.16.0.0-172.31.255.255
-      allowed-peer-ip=192.168.191.127
-    '';
   };
 
-  services.matrix-synapse = {
+  networking.firewall = with config.services.coturn; {
     enable = true;
-    server_name = "borgstad.dk";
-    enable_metrics = true;
-    enable_registration = true;
-    public_baseurl = "https://matrix.borgstad.dk/";
-    registration_shared_secret = "ZqthyiKPZYmqsjaixThzwXusKhljfiwsua5T4yNQyZ7TExyz7D2hk0v3Ib0dFSKL";
-    tls_certificate_path = "/var/lib/acme/borgstad.dk/fullchain.pem";
-    tls_private_key_path = "/var/lib/acme/borgstad.dk/key.pem";
-    database_type = "psycopg2";
-    database_args = {
-      password = "synapse";
-      user = "matrix-synapse";
-      host = "localhost";
-    };
-    listeners = [
-      { # federation
-        bind_address = "";
-        port = 8448;
-        resources = [
-          { compress = true; names = [ "client" ]; }
-          { compress = false; names = [ "federation" ]; }
-        ];
-        tls = true;
-        type = "http";
-        x_forwarded = false;
-      }
-      { # client
-        bind_address = "127.0.0.1";
-        port = 8008;
-        resources = [
-          { compress = true; names = [ "client" ]; }
-        ];
-        tls = false;
-        type = "http";
-        x_forwarded = true;
-      }
+    allowPing = false;
+    allowedUDPPorts = [ 3478 ];
+    allowedTCPPorts = [
+      3478  # STUN tls
+      80    # http
+      443   # https
     ];
+    allowedUDPPortRanges = [
+      { from=min-port; to=max-port; } # TURN relay
+    ];
+  };
 
-    turn_uris = [
-      "turn:turn.matrix.borgstad.dk:3478?transport=udp"
-      "turn:turn.matrix.borgstad.dk:3478?transport=tcp"
-    ];
-    turn_shared_secret = config.services.coturn.static-auth-secret;
+  # share certs with coturn and restart on renewal
+  security.acme.certs = {
+    "turn.borgstad.dk" = {
+      group = "turnserver";
+      postRun = "systemctl reload nginx.service; systemctl restart coturn.service";
+    };
+  };
+
+  services.matrix-synapse = with config.services.coturn; with config.security.acme.certs."borgstad.dk"; {
+    settings = {
+      tls_certificate_path = config.security.acme.certs."borgstad.dk".directory + "/fullchain.pem";
+      tls_private_key_path = config.security.acme.certs."borgstad.dk".directory + "/key.pem";
+      server_name = "borgstad.dk";
+
+      listeners = [
+        { # federation
+          bind_addresses = [ "" ];
+          port = 8448;
+          resources = [
+            { compress = true; names = [ "client" ]; }
+            { compress = false; names = [ "federation" ]; }
+          ];
+          tls = true;
+          type = "http";
+          x_forwarded = false;
+        }
+        { # client
+          bind_addresses = [ "127.0.0.1" ];
+          port = 8008;
+          resources = [
+            { compress = true; names = [ "client" ]; }
+          ];
+          tls = false;
+          type = "http";
+          x_forwarded = true;
+        }
+      ];
+
+      turn_shared_secret = config.services.coturn.static-auth-secret;
+      turn_uris = [
+        "turn:turn.borgstad.dk:3478?transport=udp"
+        "turn:turn.borgstad.dk:3478?transport=tcp"
+      ];
+
+      enable_metrics = true;
+      database_type = "psycopg2";
+      database_args = {
+        password = "synapse";
+        user = "matrix-synapse";
+        host = "localhost";
+      };
+      enable_registration = false;
+      public_baseurl = "https://matrix.borgstad.dk/";
+      registration_shared_secret = config.services.coturn.static-auth-secret;
+    };
+    enable = true;
   };
 
   services.postgresql = {
