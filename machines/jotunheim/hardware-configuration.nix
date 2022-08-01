@@ -15,12 +15,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
-  # boot.kernelPackages = {
-  #   pkgs.linuxPackages_latest;
-  #   config.boot.zfs.package.latestCompatibleLinuxPackges;
-  # }
   hardware.cpu.intel.updateMicrocode = true;
-
 
   fileSystems."/" =
     { device = "rpool/root/nixos";
