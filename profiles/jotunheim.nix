@@ -12,14 +12,18 @@ with lib;
     bash
     ctags
     curl
+    docker
     element-desktop
     emacs
     firefox
     gitAndTools.gitFull
     gnumake
     htop
-    nix-prefetch-scripts
+    kompose
+    kubectl
+    kubernetes
     mkpasswd
+    nix-prefetch-scripts
     openssl
     python37
     stdenv
@@ -28,6 +32,7 @@ with lib;
     sysstat
     tmux
     unzip
+    vnstat
     vim
     wget
     zip
@@ -39,10 +44,11 @@ with lib;
     ../pkgs/bash
     ../pkgs/ssh-server
     ../pkgs/my-pages
+    ../pkgs/media-servers-network
     ../pkgs/synapse
+    ../pkgs/emacs
     ../pkgs/xserver
-    ../pkgs/plex
-    ../pkgs/deluge
+    # ../pkgs/kubernetes
     ../pkgs/grafana
     ../modules/syncthing
     ../modules/users/standard-user.nix
@@ -53,12 +59,15 @@ with lib;
     enable = true;
     user = "ymir";
   };
+  virtualisation.docker.enable = true;
+  users.users.ymir.extraGroups = [ "docker" ];
   services.borgstadUser = {
     user = "ymir";
     isAdmin = true;
     hashedPasswordPath = "";
     sshAuthKeysPath = [ "" ];
   };
+  services.vnstat.enable = true;
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
@@ -74,4 +83,5 @@ with lib;
         }
     });
   '';
+
 }

@@ -8,7 +8,7 @@
     openFirewall = true;
     declarative = true;
     config = {
-      download_location = "/plex/videos";
+      download_location = "/tank/videos";
       sequential_download = true;
       allow_remote = true;
       max_upload_speed = "500.0";
