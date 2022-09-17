@@ -4,6 +4,6 @@
   services.plex = {
     enable = true;
     openFirewall = true;
-    dataDir = "/plex";
+    dataDir = "/test/plex-data";
   };
 }
