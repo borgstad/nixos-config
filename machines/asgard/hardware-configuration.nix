@@ -35,6 +35,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/open-sourdough/images" = {
+    device = "192.168.0.140:/tank/open-sourdough/images";
+    options = [ "x-systemd.automount" "noauto" ]; # only connect when data is accessed
+    fsType = "nfs";
+  };
+
   swapDevices = [ ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

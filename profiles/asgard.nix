@@ -6,62 +6,62 @@ with lib;
 {
   environment.systemPackages = with pkgs; [
     alacritty
-    aspell
     anki
+    aspell
     aspellDicts.en
     bash
     ctags
     curl
-    graphviz
     element-desktop
     firefox
     gcc
     gitAndTools.gitFull
     gnumake
+    go
+    graphviz
     htop
     mkpasswd
     nix-prefetch-scripts
     nodejs
+    okular
     openssl
+    pinentry
+    pkgs.dwarf-fortress-packages.dwarf-fortress-full
     python37
+    rustup
     slack
     sqlite
-    okular
     stdenv
+    spotifyd
+    spotify-tui
     strace
+    SDL2
     sudo
     sysstat
-    go
+    teams
     tmux
     unzip
     vim
+    vscode
     wget
+    wireguard-tools
     zip
   ];
   nixpkgs.config.allowUnfree = true;
   imports = [
     ../machines/asgard/hardware-configuration.nix
     ../machines/asgard/network.nix
-    # ../pkgs/bash
+    ../pkgs/wireguard
     ../pkgs/zsh
+    ../pkgs/steam
+    # ../pkgs/ssh-server
+
+    # ../pkgs/openvpn
     ../pkgs/emacs
     ../pkgs/xserver
     ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
-
-  (final: prev: {
-  anki = prev.anki.overrideAttrs (oldAttrs: rec {
-    version = "2.1.28";
-    pname = oldAttrs.pname;
-    src = prev.fetchurl {
-      urls = [
-        "https://github.com/ankitects/anki/archive/${version}.tar.gz"
-      ];
-      sha256 = "0000000000000000000000000000000000000000000000000000";
-    };
-  });
-  })
 
   services.borgstadSyncthing = {
     enable = true;
@@ -77,4 +77,26 @@ with lib;
   users.users.odin.extraGroups = [ "docker" ];
   users.users.odin.shell = pkgs.zsh;
   users.defaultUserShell = pkgs.zsh;
+
+  services.gnome.gnome-online-accounts.enable = lib.mkForce false;
+  services.gnome.gnome-keyring.enable = lib.mkForce false;
+  programs.seahorse.enable = lib.mkForce false;
+  services.pcscd.enable = true;
+  programs.gnupg.agent.enable = true;
+  networking.firewall = {
+    allowedUDPPorts = [ 8888 ]; # Clients and peers can use the same port, see listenpotr
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-runtime"
+  ];
+
+
 }
