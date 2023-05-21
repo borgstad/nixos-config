@@ -1,10 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-  # Enable the X11 windowing system.
-
 
 {
+  system.stateVersion = "20.09"; # Did you read the comment?
   environment.systemPackages = with pkgs; [
     alacritty
     aspell
