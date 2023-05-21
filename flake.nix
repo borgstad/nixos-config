@@ -39,7 +39,7 @@
         #     sops.defaultSopsFormat = "json";
         #   };
         # }
-        ;
+        # ;
 
         # Configurations for my (only) macOS machine (using nix-darwin)
         # darwinConfigurations = {
@@ -74,5 +74,4 @@
         };
         formatter = pkgs.nixpkgs-fmt;
       };
-    };
 }
