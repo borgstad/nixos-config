@@ -7,17 +7,16 @@
     nixpkgs.url = "nixpkgs/nixos-22.11";
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       systems = [ "x86_64-linux" ];
+      lib = nixpkgs.lib;
     in {
-
-      nixosConfigurations = {
-        jotunheim = {
+      nixosConfigurations =  {
+        jotunheim = lib.nixosSystem {
           inherit systems inputs;
           modules = [
             ./configuration.nix
-            ./profiles/jotunheim.nix
           ];
         };
       };
