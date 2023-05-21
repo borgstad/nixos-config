@@ -4,8 +4,8 @@
   inputs = {
     # App inputs
     nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
-    nixpkgs.url = "nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:nixpkgs/nixos-unstable";
    };
 
   outputs = inputs@{ self, ... }:
