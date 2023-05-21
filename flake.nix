@@ -15,7 +15,7 @@
       #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
       # };
     in {
-      inherit system;
+      inherit systems;
       modules = [
         ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
         ./configuration.nix
