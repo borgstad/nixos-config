@@ -14,6 +14,7 @@
       inherit systems inputs;
       modules = [
         ./configuration.nix
+        ./profiles/jotunheim.nix
       ];
     };
 }
