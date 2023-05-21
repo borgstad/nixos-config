@@ -13,11 +13,13 @@
     in {
 
       nixosConfiguration = {
-        inherit systems inputs;
-      modules = [
-        ./configuration.nix
-        ./profiles/jotunheim.nix
-        ];
+        jotunheim = {
+          inherit systems inputs;
+          modules = [
+            ./configuration.nix
+            ./profiles/jotunheim.nix
+          ];
+        };
       };
     };
 }
