@@ -17,7 +17,7 @@
     in {
       inherit systems;
       modules = [
-        ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+        # ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
         ./configuration.nix
       ];
       # nixosConfigurations.jotunheim = nixpkgs.lib.nixosSystem {
