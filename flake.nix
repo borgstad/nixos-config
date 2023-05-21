@@ -11,10 +11,12 @@
     let
       systems = [ "x86_64-linux" ];
     in {
-      inherit systems inputs;
+
+      nixosConfiguration = {
+        inherit systems inputs;
       modules = [
         ./configuration.nix
         ./profiles/jotunheim.nix
-      ];
+        ];
     };
 }
