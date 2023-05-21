@@ -44,20 +44,21 @@ with lib;
   ];
 
   imports = [
+    # ../pkgs/grafana
     ../machines/jotunheim/hardware-configuration.nix
     ../machines/jotunheim/network.nix
-    ../pkgs/bash
-    ../pkgs/ssh-server
-    ../pkgs/deluge
-    ../pkgs/my-pages
-    ../pkgs/media-servers-network
-    ../pkgs/synapse
-    ../pkgs/emacs
-    ../pkgs/xserver
-    ../pkgs/kubernetes
-    # ../pkgs/grafana
     ../modules/syncthing
     ../modules/users/standard-user.nix
+    ../pkgs/bash
+    ../pkgs/deluge
+    ../pkgs/emacs
+    ../pkgs/kubernetes
+    ../pkgs/media-servers-network
+    ../pkgs/my-pages
+    ../pkgs/ssh-server
+    ../pkgs/synapse
+    ../pkgs/vs-code
+    ../pkgs/xserver
   ];
   nixpkgs.config.allowUnfree = true;
 
