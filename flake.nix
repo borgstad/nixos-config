@@ -18,5 +18,6 @@
         ./configuration.nix
         ./profiles/jotunheim.nix
         ];
-    };
+      };
+    }
 }
