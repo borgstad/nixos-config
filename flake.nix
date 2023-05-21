@@ -18,6 +18,7 @@
           inherit system;
           modules = [
             ./configuration.nix
+            ./profiles/jotunheim.nix
           ];
         };
       };
