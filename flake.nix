@@ -15,6 +15,7 @@
       modules = [
         ./configuration.nix
         ./profiles
+        ./machines/jotunheim
       ];
     };
 }
