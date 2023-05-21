@@ -3,7 +3,7 @@
 
   inputs = {
     # App inputs
-    nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "nixpkgs/nixos-22.11";
   };
 
@@ -16,6 +16,9 @@
       nixosConfigurations =  {
         jotunheim = lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             ./profiles/jotunheim.nix
           ];
