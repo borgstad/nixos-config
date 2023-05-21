@@ -17,7 +17,6 @@
         jotunheim = lib.nixosSystem {
           inherit system;
           modules = [
-            ./configuration.nix
             ./profiles/jotunheim.nix
           ];
         };
