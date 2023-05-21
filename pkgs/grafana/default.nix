@@ -24,9 +24,11 @@
 
   services.grafana = {
     enable = true;
-    domain = "grafana.borgstad";
-    port = 2342;
-    addr = "127.0.0.1";
+    settings.server = {
+      domain = "grafana.borgstad";
+      http_port = 2342;
+      http_addr = "127.0.0.1";
+    };
   };
 
   # nginx reverse proxy

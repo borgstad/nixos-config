@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
+
 let
-  kubeMasterIP = "10.1.1.2";
+  kubeMasterIP = "192.168.0.140";
   kubeMasterHostname = "api.kube";
   kubeMasterAPIServerPort = 6443;
 in
@@ -11,9 +12,7 @@ in
   # packages for administration tasks
   environment.systemPackages = with pkgs; [
     kompose
-    kubectl
-    kubernetes
-  ];
+ ];
 
   services.kubernetes = {
     roles = ["master" "node"];
@@ -30,5 +29,12 @@ in
 
     # needed if you use swap
     kubelet.extraOpts = "--fail-swap-on=false";
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      kubeMasterAPIServerPort
+    ];
   };
 }

@@ -13,15 +13,21 @@ with lib;
     ctags
     curl
     docker
+    docker-compose
+    direnv
     element-desktop
     emacs
     firefox
     gitAndTools.gitFull
     gnumake
     htop
+    k9s
     kompose
     kubectl
     kubernetes
+    kustomize
+    kubeseal
+    k9s
     mkpasswd
     nix-prefetch-scripts
     openssl
@@ -43,13 +49,14 @@ with lib;
     ../machines/jotunheim/network.nix
     ../pkgs/bash
     ../pkgs/ssh-server
+    ../pkgs/deluge
     ../pkgs/my-pages
     ../pkgs/media-servers-network
     ../pkgs/synapse
     ../pkgs/emacs
     ../pkgs/xserver
-    # ../pkgs/kubernetes
-    ../pkgs/grafana
+    ../pkgs/kubernetes
+    # ../pkgs/grafana
     ../modules/syncthing
     ../modules/users/standard-user.nix
   ];
@@ -59,13 +66,20 @@ with lib;
     enable = true;
     user = "ymir";
   };
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    containerd.enable = true;
+    docker.enable = true;
+  };
   users.users.ymir.extraGroups = [ "docker" ];
   services.borgstadUser = {
     user = "ymir";
     isAdmin = true;
     hashedPasswordPath = "";
     sshAuthKeysPath = [ "" ];
+  };
+  networking.firewall = {
+    allowedTCPPorts = [ 8053 ];
+    allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenpotr
   };
   services.vnstat.enable = true;
   systemd.targets.sleep.enable = false;
@@ -83,5 +97,10 @@ with lib;
         }
     });
   '';
-
+  # Once a day
+  #system.autoUpgrade = {
+  #  enable = true;
+  #  channel = "https://nixos.org/channels/nixos-22.05";
+  #};
+  nix.settings.experimental-features = [ "nix-command flakes" ];
 }
