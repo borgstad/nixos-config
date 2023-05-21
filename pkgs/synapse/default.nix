@@ -38,12 +38,12 @@
   services.coturn = with config.security.acme.certs."turn.borgstad.dk"; {
     enable = true;
     use-auth-secret = false;
-    static-auth-secret = builtins.readFile ./auth-secret;
+    # static-auth-secret = builtins.readFile ./auth-secret;
     realm = "turn.borgstad.dk";
     relay-ips = [
       "192.168.0.140"
     ];
-    cli-password = builtins.readFile ./cli-password;
+    # cli-password = builtins.readFile ./cli-password;
     no-tcp-relay = true;
     extraConfig = "
       cipher-list=\"HIGH\"
@@ -107,7 +107,7 @@
         }
       ];
 
-      turn_shared_secret = config.services.coturn.static-auth-secret;
+      # turn_shared_secret = config.services.coturn.static-auth-secret;
       turn_uris = [
         "turn:turn.borgstad.dk:3478?transport=udp"
         "turn:turn.borgstad.dk:3478?transport=tcp"
@@ -122,7 +122,7 @@
       };
       enable_registration = false;
       public_baseurl = "https://matrix.borgstad.dk/";
-      registration_shared_secret = config.services.coturn.static-auth-secret;
+      # registration_shared_secret = config.services.coturn.static-auth-secret;
     };
     enable = true;
   };
