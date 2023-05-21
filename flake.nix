@@ -9,12 +9,13 @@
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
-      systems = [ "x86_64-linux" ];
+      # systems = [ "x86_64-linux" ];
+      system = "x86_64-linux"
       lib = nixpkgs.lib;
     in {
       nixosConfigurations =  {
         jotunheim = lib.nixosSystem {
-          inherit systems inputs;
+          inherit system;
           modules = [
             ./configuration.nix
           ];
