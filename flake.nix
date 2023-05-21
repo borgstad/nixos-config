@@ -12,7 +12,7 @@
       systems = [ "x86_64-linux" ];
     in {
 
-      nixosConfiguration = {
+      nixosConfigurations = {
         jotunheim = {
           inherit systems inputs;
           modules = [
