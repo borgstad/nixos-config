@@ -11,7 +11,7 @@
     let
       systems = [ "x86_64-linux" ];
     in {
-      inherit systems;
+      inherit systems nixpkgs;
       modules = [
         ./configuration.nix
       ];
