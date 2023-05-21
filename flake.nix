@@ -5,15 +5,15 @@
     # App inputs
     nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "github:nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "github:nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:nixpkgs/nixos-unstable";
   };
 
   outputs = inputs@{ self, ... }:
     let
       systems = [ "x86_64-linux" ];
-      overlay-unstable = final: prev: {
-        unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-      };
+      # overlay-unstable = final: prev: {
+      #   unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+      # };
     in {
       inherit system;
       modules = [
