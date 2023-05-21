@@ -19,5 +19,5 @@
         ./profiles/jotunheim.nix
         ];
       };
-    }
+    };
 }
