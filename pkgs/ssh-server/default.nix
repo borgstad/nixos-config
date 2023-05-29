@@ -6,4 +6,9 @@
     passwordAuthentication = false;
     ports = [ 51537 ];
   };
+  networking.firewall = {
+    allowedTCPPorts = [
+      51537
+    ];
+  };
 }
