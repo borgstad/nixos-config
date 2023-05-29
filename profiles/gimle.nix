@@ -8,11 +8,8 @@ with lib;
     alacritty
     aspell
     aspellDicts.en
-    bash
     ctags
     curl
-    docker
-    docker-compose
     direnv
     element-desktop
     firefox
@@ -33,7 +30,9 @@ with lib;
     vim
     wget
     zip
+    zsh
   ];
+  environment.shells = with pkgs; [ zsh ];
 
   imports = [
     # ../pkgs/grafana
@@ -41,7 +40,7 @@ with lib;
     ../machines/gimle/network.nix
     ../modules/syncthing
     ../modules/users/standard-user.nix
-    ../pkgs/bash
+    ../pkgs/zsh
     ../pkgs/deluge
     ../pkgs/emacs
     #../pkgs/kubernetes
@@ -65,5 +64,6 @@ with lib;
     sshAuthKeysPath = [ "" ];
   };
   services.vnstat.enable = true;
+  users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
 }
