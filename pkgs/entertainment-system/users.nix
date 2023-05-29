@@ -2,7 +2,7 @@
 
 {
   users.groups.media = {
-    members = ["ymir"];
+    members = ["surt"];
     gid = 2000;
   };
   users.users.deluge = {

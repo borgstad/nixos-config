@@ -41,8 +41,8 @@ with lib;
     ../modules/syncthing
     ../modules/users/standard-user.nix
     ../pkgs/zsh
-    ../pkgs/deluge
     ../pkgs/emacs
+    ../pkgs/entertainment-system
     #../pkgs/kubernetes
     #../pkgs/media-servers-network
     #../pkgs/my-pages
