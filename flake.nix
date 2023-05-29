@@ -29,6 +29,15 @@
             })
           ];
         };
+        gimle = lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./profiles/gimle.nix
+          ];
+        };
       };
     };
 }
