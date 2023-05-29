@@ -15,7 +15,6 @@ with lib;
     docker-compose
     direnv
     element-desktop
-    emacs
     firefox
     gitAndTools.gitFull
     gnumake
