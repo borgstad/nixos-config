@@ -42,7 +42,7 @@ with lib;
     ../modules/users/standard-user.nix
     ../pkgs/zsh
     ../pkgs/emacs
-    ../pkgs/entertainment-system
+    ../pkgs/htpc
     #../pkgs/kubernetes
     #../pkgs/media-servers-network
     #../pkgs/my-pages

@@ -23,11 +23,34 @@
   fileSystems."/" =
     { device = "rpool/root";
       fsType = "zfs";
+      options=[ "nofail" ];
     };
 
   fileSystems."/home" =
     { device = "rpool/home";
       fsType = "zfs";
+      options=[ "nofail" ];
+    };
+
+  fileSystems."/tank" =
+    { device = "tank";
+      fsType = "zfs";
+      options=[ "nofail" ];
+    };
+  fileSystems."/tank/house-scraper" =
+    { device = "tank/house-scraper";
+      fsType = "zfs";
+      options=[ "nofail" ];
+    };
+  fileSystems."/tank/ml" =
+    { device = "tank/ml";
+      fsType = "zfs";
+      options=[ "nofail" ];
+    };
+  fileSystems."/tank/open-sourdough" =
+    { device = "tank/open-sourdough";
+      fsType = "zfs";
+      options=[ "nofail" ];
     };
 
   swapDevices = [ ];

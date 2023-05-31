@@ -5,4 +5,6 @@
     [
       ./deluge.nix
       ./users.nix
+      ./jellyfin.nix
     ];
+}

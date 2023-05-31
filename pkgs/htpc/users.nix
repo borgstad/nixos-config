@@ -5,11 +5,11 @@
     members = ["surt"];
     gid = 2000;
   };
-  users.users.deluge = {
-    isSystemUser = true;
-    uid = 1100;
-    group = "media";
-  };
+  # users.users.deluge = {
+  #   isSystemUser = true;
+  #   uid = 1100;
+  #   group = "media";
+  # };
   users.users.sonarr = {
     isSystemUser = true;
     uid = 1101;
@@ -20,11 +20,11 @@
     uid = 1102;
     group = "media";
   };
-  users.users.jellyfin = {
-    isSystemUser = true;
-    uid = 1103;
-    group = "media";
-  };
+  # users.users.jellyfin = {
+  #   isSystemUser = true;
+  #   uid = 1103;
+  #   group = "media";
+  # };
   networking.firewall = {
     enable = true;
     allowPing = false;
