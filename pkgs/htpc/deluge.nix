@@ -1,32 +1,27 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
- services.deluge = {
+  imports = [ ../../secrets ];
+
+  services.deluge = {
    enable = true;
-   web.enable = true;
-   web.openFirewall = true;
+   web = {
+    enable = true;
+     openFirewall = true;
+     port = 8112;
+   };
    openFirewall = true;
    declarative = true;
    config = {
-     download_location = "/tank/videos";
+     download_location = "/tank/complete";
      sequential_download = true;
      allow_remote = true;
      max_upload_speed = "500.0";
      daemon_port = 58846;
      listen_ports = [ 6881 6889 ];
    };
-   authFile = builtins.toString ./authfile;
+   authFile = config.age.secrets.deluge-pass.path;
    user = "deluge";
    group = "media";
- };
-
-  networking.firewall = {
-    enable = true;
-    allowPing = false;
-    allowedTCPPorts = [
-      6881
-      6889
-      58846
-    ];
-  };
+   };
 }

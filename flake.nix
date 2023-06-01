@@ -5,11 +5,12 @@
     # App inputs
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "nixpkgs/nixos-22.11";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, vscode-server, ... }:
+  outputs = inputs@{ self, nixpkgs, agenix, vscode-server, ... }:
     let
-      # systems = [ "x86_64-linux" ];
       system = "x86_64-linux";
       lib = nixpkgs.lib;
     in {
@@ -22,7 +23,6 @@
           modules = [
             ./profiles/jotunheim.nix
             # How to move this into a seperate file?
-
             vscode-server.nixosModules.default
             ({ config, pkgs, ... }: {
               services.vscode-server.enable = true;

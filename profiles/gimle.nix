@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 with lib;
 
@@ -14,6 +14,7 @@ with lib;
     element-desktop
     firefox
     gitAndTools.gitFull
+    inputs.agenix.packages."${system}".default
     gnumake
     htop
     mkpasswd
