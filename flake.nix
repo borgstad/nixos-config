@@ -4,7 +4,7 @@
   inputs = {
     # App inputs
     vscode-server.url = "github:nix-community/nixos-vscode-server";
-    nixpkgs.url = "nixpkgs/nixos-22.11";
+    nixpkgs.url = "nixpkgs/nixos-23.05";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
