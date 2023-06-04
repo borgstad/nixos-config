@@ -3,12 +3,13 @@
 {
   imports =
     [
-      ./sonarr.nix
+      ./deluge.nix
+      ./jellyfin.nix
       ./prowlarr.nix
       ./radarr.nix
-      ./deluge.nix
+      ./sonarr.nix
+      ./bazarr.nix
       ./users.nix
-      ./jellyfin.nix
     ];
 
   users.groups.indolentdk.members = [ "nginx" ];

@@ -3,11 +3,11 @@
 {
   users.groups.media = {
     members = ["surt"
-               "deluge"
-               "sonarr"
-               "radarr"
-               "jellyfin"
-               "prowlarr"
+               config.services.bazarr.user
+               config.services.deluge.user
+               config.services.jellyfin.user
+               config.services.radarr.user
+               config.services.sonarr.user
               ];
   };
 }
