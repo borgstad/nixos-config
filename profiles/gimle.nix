@@ -25,7 +25,6 @@ with lib;
     strace
     sudo
     sysstat
-    tmux
     unzip
     vnstat
     vim
@@ -49,7 +48,8 @@ with lib;
     #../pkgs/my-pages
     ../pkgs/ssh-server
     #../pkgs/synapse
-    #../pkgs/vs-code
+    ../pkgs/tmux
+    ../pkgs/vs-code
     ../pkgs/xserver
   ];
   nixpkgs.config.allowUnfree = true;
