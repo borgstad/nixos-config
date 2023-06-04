@@ -25,6 +25,7 @@ with lib;
     strace
     sudo
     sysstat
+    sqlite
     unzip
     vnstat
     vim

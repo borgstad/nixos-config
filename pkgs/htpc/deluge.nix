@@ -19,6 +19,9 @@
      max_upload_speed = "5000.0";
      daemon_port = 58846;
      listen_ports = [ 6881 6889 ];
+     enabled_plugins = [ "Label" ];
+     max_active_downloading = 15;
+     max_active_limit = 20;
    };
    authFile = config.age.secrets.deluge-pass.path;
    user = "deluge";
