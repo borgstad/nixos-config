@@ -2,6 +2,12 @@
 
 {
   users.groups.media = {
-    members = ["surt" "deluge" "sonarr" "radarr" "jellyfin" ];
+    members = ["surt"
+               "deluge"
+               "sonarr"
+               "radarr"
+               "jellyfin"
+               "prowlarr"
+              ];
   };
 }

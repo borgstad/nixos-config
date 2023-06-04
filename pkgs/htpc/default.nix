@@ -3,6 +3,9 @@
 {
   imports =
     [
+      ./sonarr.nix
+      ./prowlarr.nix
+      ./radarr.nix
       ./deluge.nix
       ./users.nix
       ./jellyfin.nix
@@ -58,11 +61,7 @@
      forceSSL = true;
      enableACME = true;
      locations."/" = {
-       proxyPass = "http://localhost:8112/";
-       extraConfig = ''
-         proxy_set_header X-Deluge-Base "/deluge/";
-         add_header X-Frame-Options SAMEORIGIN;
-       '';
+       proxyPass = "http://localhost:8096/";
      };
    };
   };

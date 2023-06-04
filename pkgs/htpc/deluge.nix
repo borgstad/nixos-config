@@ -16,7 +16,7 @@
      download_location = "/tank/complete";
      sequential_download = true;
      allow_remote = true;
-     max_upload_speed = "500.0";
+     max_upload_speed = "5000.0";
      daemon_port = 58846;
      listen_ports = [ 6881 6889 ];
    };
