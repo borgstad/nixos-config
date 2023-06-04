@@ -7,6 +7,10 @@
     nixpkgs.url = "nixpkgs/nixos-23.05";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    ssh-keys = {
+      url = "https://github.com/borgstad.keys";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, agenix, vscode-server, ... }:
@@ -15,6 +19,15 @@
       lib = nixpkgs.lib;
     in {
       nixosConfigurations =  {
+        gimle = lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./profiles/gimle.nix
+          ];
+        };
+
         jotunheim = lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -27,15 +40,6 @@
             ({ config, pkgs, ... }: {
               services.vscode-server.enable = true;
             })
-          ];
-        };
-        gimle = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./profiles/gimle.nix
           ];
         };
       };
