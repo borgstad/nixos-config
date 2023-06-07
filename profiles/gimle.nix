@@ -13,6 +13,7 @@ with lib;
     direnv
     element-desktop
     firefox
+    litecli # sqlite client
     gitAndTools.gitFull
     inputs.agenix.packages."${system}".default
     gnumake
