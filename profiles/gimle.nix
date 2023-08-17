@@ -45,7 +45,7 @@ with lib;
     ../pkgs/zsh
     ../pkgs/emacs
     ../pkgs/htpc
-    # ../pkgs/xrdp
+    ../pkgs/xrdp
     # ../pkgs/wireguard
     #../pkgs/kubernetes
     #../pkgs/media-servers-network
@@ -77,5 +77,4 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
-
 }
