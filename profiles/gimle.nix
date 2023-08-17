@@ -37,19 +37,21 @@ with lib;
   environment.shells = with pkgs; [ zsh ];
 
   imports = [
-    # ../pkgs/grafana
     ../machines/gimle/hardware-configuration.nix
     ../machines/gimle/network.nix
     ../modules/syncthing
     ../modules/users/standard-user.nix
+    ../pkgs/grafana
     ../pkgs/zsh
     ../pkgs/emacs
     ../pkgs/htpc
+    # ../pkgs/xrdp
+    # ../pkgs/wireguard
     #../pkgs/kubernetes
     #../pkgs/media-servers-network
-    #../pkgs/my-pages
+    ../pkgs/my-pages
     ../pkgs/ssh-server
-    #../pkgs/synapse
+    ../pkgs/synapse
     ../pkgs/tmux
     ../pkgs/vs-code
     ../pkgs/xserver
@@ -60,6 +62,8 @@ with lib;
     enable = true;
     user = "surt";
   };
+  # inputs.sometest.services.autobrr.enable = true;
+
   services.borgstadUser = {
     user = "surt";
     isAdmin = true;
@@ -73,4 +77,5 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+
 }

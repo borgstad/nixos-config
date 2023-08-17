@@ -11,24 +11,35 @@
       url = "https://github.com/borgstad.keys";
       flake = false;
     };
+    sometest.url = "path:/home/surt/code/nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, agenix, vscode-server, ... }:
+  outputs = inputs@{ self, sometest, nixpkgs, agenix, vscode-server, ... }:
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
+      customNixpkgs = sometest.legacyPackages.x86_64-linux;
     in {
-      nixosConfigurations =  {
-        gimle = lib.nixosSystem {
+      nixosConfigurations = {
+        gimle = nixpkgs.lib.nixosSystem {
+          inherit system;
           specialArgs = {
             inherit inputs;
           };
           modules = [
             ./profiles/gimle.nix
+
+            # Enable the autobrr service
+            ({ pkgs, ... }: {
+              services.nginx.enable = true;
+              services.autobrr = {
+                enable = true;
+                openFirewall = true;
+              };
+            })
           ];
         };
 
-        jotunheim = lib.nixosSystem {
+        jotunheim = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs;
