@@ -29,13 +29,13 @@
             ./profiles/gimle.nix
 
             # Enable the autobrr service
-            ({ pkgs, ... }: {
-              services.nginx.enable = true;
-              services.autobrr = {
-                enable = true;
-                openFirewall = true;
-              };
-            })
+            # ({ pkgs, ... }: {
+            #   services.nginx.enable = true;
+            #   services.autobrr = {
+            #     enable = true;
+            #     openFirewall = true;
+            #   };
+            # })
           ];
         };
 
