@@ -35,39 +35,44 @@
     acceptTerms = true;
   };
 
-  services.coturn = with config.security.acme.certs."turn.borgstad.dk"; {
+  services.coturn = {
     enable = true;
-    use-auth-secret = false;
-    # static-auth-secret = builtins.readFile ./auth-secret;
+    lt-cred-mech = true;
+    use-auth-secret = true;
+    static-auth-secret = "<shared-secret>";
     realm = "turn.borgstad.dk";
     relay-ips = [
-      "192.168.0.140"
+      "80.71.131.115"
     ];
-    # cli-password = builtins.readFile ./cli-password;
     no-tcp-relay = true;
     extraConfig = "
       cipher-list=\"HIGH\"
+      no-loopback-peers
+      no-multicast-peers
     ";
     secure-stun = true;
-    cert = config.security.acme.certs."turn.borgstad.dk".directory + "/fullchain.pem";
-    pkey = config.security.acme.certs."turn.borgstad.dk".directory + "/key.pem";
-    min-port = 49000;
-    max-port = 50000;
+    cert = "/var/lib/acme/turn.borgstad.dk/fullchain.pem";
+    pkey = "/var/lib/acme/turn.borgstad.dk/key.pem";
+    min-port = 49152;
+    max-port = 49999;
   };
 
-  networking.firewall = with config.services.coturn; {
+  # Open ports in the firewall.
+  networking.firewall = {
     enable = true;
     allowPing = false;
-    allowedUDPPorts = [ 3478 ];
     allowedTCPPorts = [
-      3478  # STUN tls
+      5349  # STUN tls
+      5350  # STUN tls alt
       80    # http
       443   # https
+      8448
     ];
     allowedUDPPortRanges = [
-      { from=min-port; to=max-port; } # TURN relay
+      { from=49152; to=49999; } # TURN relay
     ];
   };
+
 
   # share certs with coturn and restart on renewal
   security.acme.certs = {
@@ -77,10 +82,10 @@
     };
   };
 
-  services.matrix-synapse = with config.services.coturn; with config.security.acme.certs."borgstad.dk"; {
+  services.matrix-synapse = with config.services.coturn; with config.security.acme.certs."matrix.borgstad.dk"; {
     settings = {
-      tls_certificate_path = config.security.acme.certs."borgstad.dk".directory + "/fullchain.pem";
-      tls_private_key_path = config.security.acme.certs."borgstad.dk".directory + "/key.pem";
+      tls_certificate_path = config.security.acme.certs."matrix.borgstad.dk".directory + "/fullchain.pem";
+      tls_private_key_path = config.security.acme.certs."matrix.borgstad.dk".directory + "/key.pem";
       server_name = "borgstad.dk";
 
       listeners = [
@@ -107,7 +112,7 @@
         }
       ];
 
-      # turn_shared_secret = config.services.coturn.static-auth-secret;
+      turn_shared_secret = config.services.coturn.static-auth-secret;
       turn_uris = [
         "turn:turn.borgstad.dk:3478?transport=udp"
         "turn:turn.borgstad.dk:3478?transport=tcp"

@@ -22,9 +22,14 @@
      enabled_plugins = [ "Label" ];
      max_active_downloading = 15;
      max_active_limit = 20;
+     interface = "wg0";
    };
    authFile = config.age.secrets.deluge-pass.path;
    user = "deluge";
    group = "media";
-   };
+   # extraOptions = "--do-not-daemonize --loglevel=info";
+   # Setup network namespace for Deluge
+  };
+
+
 }
