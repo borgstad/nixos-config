@@ -1,6 +1,4 @@
 { config, pkgs, ... }: {
-  # grafana configuration
-
   services.prometheus = {
     enable = false;
     port = 9001;
@@ -8,13 +6,13 @@
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd"  ];
+        enabledCollectors = [ "systemd" ];
         port = 9002;
       };
     };
     scrapeConfigs = [
       {
-        job_name = "chrysalis";
+        job_name = "scraper";
         static_configs = [{
           targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
         }];
@@ -39,12 +37,12 @@
     };
   };
 
-  # services.nginx.virtualHosts."status.borgstad.dk" = {
-  #   enableACME = true;
-  #   forceSSL = true;
-  #   locations."/" = {
-  #       proxyPass = "http://127.0.0.1:${toString config.services.grafana.port}";
-  #       proxyWebsockets = true;
-  #   };
-  # };
+  #services.nginx.virtualHosts."monitoring.borgstad.dk" = {
+  #  enableACME = true;
+  #  forceSSL = true;
+  #  locations."/" = {
+  #      proxyPass = "http://${toString config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}/";
+  #      proxyWebsockets = true;
+  #  };
+  #};
 }
