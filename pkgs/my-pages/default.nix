@@ -10,12 +10,12 @@
       postRun = "systemctl reload nginx.service";
     };
   };
-  security.acme.certs = {
-    "fun.borgstad.dk" = {
-      group = "funborgstaddk";
-      postRun = "systemctl reload nginx.service";
-    };
-  };
+  # security.acme.certs = {
+  #   "fun.borgstad.dk" = {
+  #     group = "funborgstaddk";
+  #     postRun = "systemctl reload nginx.service";
+  #   };
+  # };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   security.acme = {
@@ -41,16 +41,16 @@
       };
     };
 
-    virtualHosts."fun.borgstad.dk" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/deluge" = {
-        proxyPass = "http://localhost:8112/";
-        extraConfig = ''
-          proxy_set_header X-Deluge-Base "/deluge/";
-          add_header X-Frame-Options SAMEORIGIN;
-        '';
-      };
-    };
+    # virtualHosts."fun.borgstad.dk" = {
+    #   forceSSL = true;
+    #   enableACME = true;
+    #   locations."/deluge" = {
+    #     proxyPass = "http://localhost:8112/";
+    #     extraConfig = ''
+    #       proxy_set_header X-Deluge-Base "/deluge/";
+    #       add_header X-Frame-Options SAMEORIGIN;
+    #     '';
+    #   };
+    # };
   };
 }
