@@ -9,4 +9,8 @@
         theme = "robbyrussell";
       };
     };
+    environment.systemPackages = with pkgs; [
+      thefuck
+    ];
+    # Chat apps
 }

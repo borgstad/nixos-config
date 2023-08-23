@@ -42,6 +42,7 @@ with lib;
     ../modules/syncthing
     ../modules/users/standard-user.nix
     ../pkgs/grafana
+    ../pkgs/steam
     ../pkgs/zsh
     ../pkgs/emacs
     ../pkgs/htpc
