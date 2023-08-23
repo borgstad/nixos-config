@@ -116,21 +116,8 @@
       "inputs": {
         "agenix": "agenix",
         "nixpkgs": "nixpkgs",
-        "sometest": "sometest",
         "ssh-keys": "ssh-keys",
         "vscode-server": "vscode-server"
-      }
-    },
-    "sometest": {
-      "locked": {
-        "lastModified": 1689957700,
-        "narHash": "sha256-gjhklOK3zxVvxLB6GPWefKc/fJzXojRlGjb9yQf1fpQ=",
-        "path": "/home/surt/code/nixpkgs",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/surt/code/nixpkgs",
-        "type": "path"
       }
     },
     "ssh-keys": {

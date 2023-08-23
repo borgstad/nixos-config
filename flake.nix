@@ -11,13 +11,13 @@
       url = "https://github.com/borgstad.keys";
       flake = false;
     };
-    sometest.url = "path:/home/surt/code/nixpkgs";
+    # sometest.url = "path:/home/surt/code/nixpkgs";
   };
 
-  outputs = inputs@{ self, sometest, nixpkgs, agenix, vscode-server, ... }:
+  outputs = inputs@{ self, nixpkgs, agenix, vscode-server, ... }:
     let
       system = "x86_64-linux";
-      customNixpkgs = sometest.legacyPackages.x86_64-linux;
+      # customNixpkgs = sometest.legacyPackages.x86_64-linux;
     in {
       nixosConfigurations = {
         gimle = nixpkgs.lib.nixosSystem {
