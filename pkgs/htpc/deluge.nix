@@ -13,7 +13,7 @@
    openFirewall = true;
    declarative = true;
    config = {
-     download_location = "/tank/complete";
+     download_location = "/funpool/complete";
      sequential_download = true;
      allow_remote = true;
      max_upload_speed = "5000.0";

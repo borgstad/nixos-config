@@ -30,6 +30,7 @@ in
         "networkmanager"
         "users"
         "wheel"
+        "media"
       ];
       isNormalUser = true;
       createHome = true;

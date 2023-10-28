@@ -16,7 +16,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/46DF-34DF";
+    { device = "/dev/disk/by-uuid/46DF-34DF"; 
       fsType = "vfat";
     };
 

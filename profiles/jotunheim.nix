@@ -50,7 +50,7 @@ with lib;
     ../modules/syncthing
     ../modules/users/standard-user.nix
     ../pkgs/bash
-    ../pkgs/deluge
+    #../pkgs/deluge
     ../pkgs/emacs
     ../pkgs/kubernetes
     ../pkgs/media-servers-network

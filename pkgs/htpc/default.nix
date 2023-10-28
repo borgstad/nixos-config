@@ -13,31 +13,31 @@
     ];
 
   users.groups.indolentdk.members = [ "nginx" ];
-  fileSystems."/tank" =
-    { device = "tank";
-      fsType = "zfs";
-      options=[ "nofail" ];
-    };
-  fileSystems."/tank/house-scraper" =
-    { device = "tank/house-scraper";
-      fsType = "zfs";
-      options=[ "nofail" ];
-    };
-  fileSystems."/tank/ml" =
-    { device = "tank/ml";
-      fsType = "zfs";
-      options=[ "nofail" ];
-    };
-  fileSystems."/tank/open-sourdough" =
-    { device = "tank/open-sourdough";
-      fsType = "zfs";
-      options=[ "nofail" ];
-    };
-  fileSystems."/tank/series" =
-    { device = "tank/series";
-      fsType = "zfs";
-      options=[ "nofail" ];
-    };
+  #fileSystems."/funpool" =
+  #  { device = "funpool";
+  #    fsType = "zfs";
+  #    options=[ "nofail" ];
+  #  };
+  #fileSystems."/funpool/house-scraper" =
+  #  { device = "funpool/house-scraper";
+  #    fsType = "zfs";
+  #    options=[ "nofail" ];
+  #  };
+  #fileSystems."/funpool/ml" =
+  #  { device = "funpool/ml";
+  #    fsType = "zfs";
+  #    options=[ "nofail" ];
+  #  };
+  #fileSystems."/funpool/open-sourdough" =
+  #  { device = "funpool/open-sourdough";
+  #    fsType = "zfs";
+  #    options=[ "nofail" ];
+  #  };
+  #fileSystems."/funpool/series" =
+  #  { device = "funpool/series";
+  #    fsType = "zfs";
+  #    options=[ "nofail" ];
+  #  };
 
   security.acme.certs = {
    "indolent.dk" = {
