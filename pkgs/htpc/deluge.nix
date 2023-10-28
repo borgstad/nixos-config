@@ -30,6 +30,4 @@
    # extraOptions = "--do-not-daemonize --loglevel=info";
    # Setup network namespace for Deluge
   };
-
-
 }
