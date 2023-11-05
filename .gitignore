@@ -3,3 +3,4 @@ result
 /pkgs/synapse/auth-secret
 /pkgs/synapse/cli-password
 /pkgs/deluge/authfile
+flake.lock
