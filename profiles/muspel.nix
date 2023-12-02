@@ -10,10 +10,13 @@ with lib;
     aspellDicts.en
     ctags
     curl
+    docker-compose  
     direnv
     element-desktop
     firefox
     gcc
+    vlc
+    libvlc
     litecli # sqlite client
     gitAndTools.gitFull
     inputs.agenix.packages."${system}".default
@@ -73,4 +76,20 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+
+  systemd.user.services.startupFirefox = {
+    enable = true;
+    unitConfig = {
+      Description = "Start Firefox on login";
+      After = ["graphical-session-pre.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    serviceConfig = {
+      ExecStart = "${pkgs.firefox}/bin/firefox";
+      Restart = "on-failure";
+    };
+  };
+  virtualisation.docker.enable = true;
+  users.users.muspel.extraGroups = [ "docker" ];
+  
 }
