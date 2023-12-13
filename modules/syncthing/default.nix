@@ -17,8 +17,7 @@ in
     services = {
       syncthing = {
         enable = cfg.enable;
-        user = cfg.user;
-        configDir = "/home/${cfg.user}/.config/syncthing";
+        # configDir = "/home/${cfg.user}/.config/syncthing";
         overrideDevices = false;
         settings = {
             devices = {
