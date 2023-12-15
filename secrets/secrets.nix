@@ -4,4 +4,6 @@ let
 in
 {
   "deluge-pass.age".publicKeys = [ surt surt-sshd ];
+  "wireguard-key.age".publicKeys = [ surt surt-sshd ];
+
 }

@@ -78,4 +78,8 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+  networking.wireguard.interfaces.deluge-conn = {
+    privateKey = config.age.secrets.wireguard-key.path;
+    ips = ["192.168.1.2/24"];
+  };
 }
