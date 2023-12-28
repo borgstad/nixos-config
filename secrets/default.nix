@@ -11,4 +11,9 @@ in
     owner = "deluge";
     group = "media";
   };
+  age.secrets.wireguard-key = {
+    file = ./wireguard-key.age;
+    owner = "root";
+    group = "root";
+  };
 }
