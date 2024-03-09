@@ -1,7 +1,0 @@
-let
-  surt = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCMtkqE7aug1QasRhisRMqqwn+HHuuws/suTtPHZXNJVKrZ1TdCBVozVS3WbaxbaC54hyOSe01H4H175re6SLMgoX+E3etbUJL+l52ZejgtGed2NXQqK3JXtsioCS4HrPZaAbeyWMozAKt97YXrzcCKdCH3TfVHNtpOga3ZeJdN3qQIiiZzFeOG0I2We7KZIIG5C+6VibYluS5IXGEHVKvarGk+8JX5QRwH0Vun8kpeImnlhXy/JDo9IvGkR079b53qEv/cjwh3OXDTqKUN5K+p5VmSvCwbqncozgIajeeaO4/1dj5oQgYkEPhkfgZaE8sHpTPc4x/eJIfLBVDjIc/o9kheKFg6mVYYxc6tJsgyokS1j7N1cYQEjPRTmnTZVqW6zzG4/lHT3TGU/s5ofy30ZgCsSE2Abf3H++Bo82cxXkr7uAO2PTx6JH874inYK4zR2QHnYVoPFRa8c3GG+R/gFFA54I+OtPZvyCwg1wr3mv21nI/HNnk9Q0XkjKVRhOE= surt@gimle
-";
-in
-{
-  "matrix-synapse-secret.age".publicKeys = [ surt ];
-}

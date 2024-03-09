@@ -16,5 +16,10 @@ in
     owner = "root";
     group = "root";
   };
+  age.secrets.matrix-synapse-secret = {
+    file = ./wireguard-key.age;
+    owner = "turnserver";
+    group = "turnserver";
+  };
 
 }
