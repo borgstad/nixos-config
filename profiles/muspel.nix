@@ -5,7 +5,7 @@ with lib;
 {
   system.stateVersion = "23.05"; # Did you read the comment?
   environment.systemPackages = with pkgs; [
-    alacritty
+        # hunspellDicts.bg_BG
     aspell
     aspellDicts.en
     ctags
@@ -14,31 +14,32 @@ with lib;
     element-desktop
     firefox
     gcc
-    litecli # sqlite client
     gitAndTools.gitFull
-    inputs.agenix.packages."${system}".default
     gnumake
+    graphviz
     htop
+    hunspell
+    inputs.agenix.packages."${system}".default
+    libreoffice-qt
+    litecli # sqlite client
     mkpasswd
     nix-prefetch-scripts
     openssl
     python310
-    stdenv
     spotify
+    sqlite
+    stdenv
     strace
     sudo
     sysstat
-    sqlite
     unzip
-    vscode
-    vnstat
     vim
+    vnstat
+    vscode
     wget
     zip
     zsh
-    libreoffice-qt
-    hunspell
-    # hunspellDicts.bg_BG
+alacritty
   ];
   environment.shells = with pkgs; [ zsh ];
 
@@ -73,4 +74,11 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
 }

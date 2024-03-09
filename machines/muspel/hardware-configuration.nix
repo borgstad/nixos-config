@@ -76,10 +76,22 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    opengl.enable = true;
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
 
+    opengl.extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    bluetooth.enable = true;
+  };
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "3a0623b8";
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelParams = [ "i915.force_probe=9a49" ];
   boot.zfs.devNodes = "/dev/disk/by-partlabel";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.efi.canTouchEfiVariables = false;
