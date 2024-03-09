@@ -41,7 +41,7 @@ with lib;
     ../machines/gimle/network.nix
     ../modules/syncthing
     ../modules/users/standard-user.nix
-    ../pkgs/grafana
+    # ../pkgs/grafana
     ../pkgs/steam
     ../pkgs/zsh
     ../pkgs/emacs
@@ -65,12 +65,16 @@ with lib;
   };
   # inputs.sometest.services.autobrr.enable = true;
 
-  services.borgstadUser = {
-    user = "surt";
-    isAdmin = true;
-    hashedPasswordPath = "";
-    sshAuthKeysPath = [ "" ];
+  users.borgstadUser.surt = {
+    isAdmin = false;
+    sshKeys = [ inputs.ssh-keys-andreas.outPath ];
   };
+  users.borgstadUser.mihi = {
+    isAdmin = false;
+    sshKeys = [ inputs.ssh-keys-mihi.outPath ];
+  };
+
+
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;

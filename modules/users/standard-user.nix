@@ -1,53 +1,36 @@
-{ inputs, config, lib, pkgs, ... }:
+{ lib, config, ... }:
 
 with lib;
 
 let
-  cfg = config.services.borgstadUser;
-  inherit (inputs) ssh-keys;
-# let secrets = import ../secrets.nix;
-in
-{
-  options.services.borgstadUser = {
-    user = mkOption {
-      type = types.str;
-    };
-    isAdmin = mkOption {
-      type = types.bool;
-    };
-    hashedPasswordPath = mkOption {
-      type = types.str;
-    };
-    sshAuthKeysPath = mkOption {
-      type = types.list;
+  borgstadUserOptions = {
+    options = {
+      isAdmin = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether the user is an admin.";
+      };
+      sshKeys = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "List of SSH keys for the user.";
+      };
     };
   };
+in {
+  options.users.borgstadUser = mkOption {
+    type = types.attrsOf (types.submodule borgstadUserOptions);
+    default = {};
+    description = "Borgstad user configurations.";
+  };
 
-  config = {
-    users.extraUsers.${cfg.user} = {
-      description = "Mega server user";
-      extraGroups = [
-        "networkmanager"
-        "users"
-        "wheel"
-        "media"
-      ];
+  config = let
+    userConfigs = config.users.borgstadUser;
+  in mkIf (userConfigs != {}) {
+    users.users = mapAttrs' (name: userCfg: nameValuePair name {
       isNormalUser = true;
-      createHome = true;
-      home = "/home/${cfg.user}";
-      #openssh.authorizedKeys.keys = secrets.sshKeys.yeah;
-      # mkpasswd -m sha-512
-      hashedPassword = "$6$q24dXEvpmBMXFhlJ$H4MM4.QKwkqu7PuJVK4hdYRW5Jq..crhZF12kr.QU5reXI4kKf0r1ZBQkZb9IVQ0XV7BTgE7NfSRTLvJGf0ZQ1";
-      openssh.authorizedKeys.keyFiles = [ ssh-keys.outPath ];
-
-    };
-    system.activationScripts =
-      {
-        # Configure various dotfiles.
-        dotfiles = stringAfter [ "users" ]
-          ''
-      cd /home/${cfg.user}
-    '';
-      };
+      extraGroups = optional (userCfg.isAdmin) "wheel" ++ [ "networkmanager" "users" "media" ];
+      openssh.authorizedKeys.keyFiles = userCfg.sshKeys;
+    }) userConfigs;
   };
 }

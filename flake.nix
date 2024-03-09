@@ -7,8 +7,12 @@
     nixpkgs.url = "nixpkgs/nixos-23.11";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    ssh-keys = {
+    ssh-keys-andreas = {
       url = "https://github.com/borgstad.keys";
+      flake = false;
+    };
+    ssh-keys-mihi = {
+      url = "https://github.com/MihaelaHristov.keys";
       flake = false;
     };
   };
