@@ -41,9 +41,6 @@
     use-auth-secret = true;
     static-auth-secret = "<shared-secret>";
     realm = "turn.borgstad.dk";
-    relay-ips = [
-      "80.71.131.115"
-    ];
     no-tcp-relay = true;
     extraConfig = "
       cipher-list=\"HIGH\"
@@ -70,6 +67,9 @@
     ];
     allowedUDPPortRanges = [
       { from=49152; to=49999; } # TURN relay
+    ];
+    allowedUDPPorts = [
+      3478
     ];
   };
 
@@ -116,6 +116,7 @@
       turn_uris = [
         "turn:turn.borgstad.dk:3478?transport=udp"
         "turn:turn.borgstad.dk:3478?transport=tcp"
+        "turns:turn.borgstad.dk:5349?transport=tcp" # TURNS URI
       ];
 
       enable_metrics = true;
