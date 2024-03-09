@@ -10,12 +10,6 @@
       postRun = "systemctl reload nginx.service";
     };
   };
-  # security.acme.certs = {
-  #   "fun.borgstad.dk" = {
-  #     group = "funborgstaddk";
-  #     postRun = "systemctl reload nginx.service";
-  #   };
-  # };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   security.acme = {
@@ -33,18 +27,11 @@
     '';
   };
 
-
-
-
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
-
-    # virtualHosts."test.borgstad.dk".locations."/" = {
-    #   return = "301 https://borgstad.dk";
-    # };
 
     virtualHosts."borgstad.dk" = {
       enableACME = true;
@@ -57,17 +44,5 @@
         extraConfig = "rewrite ^.*/server$ /matrix-server.json break;"; # Rewrite to serve the correct file
       };
     };
-
-    # virtualHosts."fun.borgstad.dk" = {
-    #   forceSSL = true;
-    #   enableACME = true;
-    #   locations."/deluge" = {
-    #     proxyPass = "http://localhost:8112/";
-    #     extraConfig = ''
-    #       proxy_set_header X-Deluge-Base "/deluge/";
-    #       add_header X-Frame-Options SAMEORIGIN;
-    #     '';
-    #   };
-    # };
   };
 }
