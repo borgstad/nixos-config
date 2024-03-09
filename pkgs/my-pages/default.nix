@@ -23,6 +23,19 @@
     defaults.email = "aborgstad@gmail.com";
   };
 
+  # Required by matrix
+  environment.etc."matrix-server.json" = {
+    mode = "0444"; # Readable by everyone
+    text = ''
+      {
+        "m.server": "matrix.borgstad.dk:8448"
+      }
+    '';
+  };
+
+
+
+
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -38,6 +51,10 @@
       forceSSL = true;
       locations."/" = {
         root = "/var/www/test";
+      };
+      locations."/.well-known/matrix/server" = {
+        root = "/etc"; # Set the root to /etc
+        extraConfig = "rewrite ^.*/server$ /matrix-server.json break;"; # Rewrite to serve the correct file
       };
     };
 

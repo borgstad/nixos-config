@@ -66,7 +66,7 @@ with lib;
   # inputs.sometest.services.autobrr.enable = true;
 
   users.borgstadUser.surt = {
-    isAdmin = false;
+    isAdmin = true;
     sshKeys = [ inputs.ssh-keys-andreas.outPath ];
   };
   users.borgstadUser.mihi = {
