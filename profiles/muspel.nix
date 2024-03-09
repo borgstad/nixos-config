@@ -61,11 +61,8 @@ alacritty
     enable = true;
     user = "muspel";
   };
-  services.borgstadUser = {
-    user = "muspel";
+  users.borgstadUser.muspel = {
     isAdmin = true;
-    hashedPasswordPath = "";
-    sshAuthKeysPath = [ "" ];
   };
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
