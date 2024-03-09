@@ -5,5 +5,5 @@ in
 {
   "deluge-pass.age".publicKeys = [ surt surt-sshd ];
   "wireguard-key.age".publicKeys = [ surt surt-sshd ];
-
+  "matrix-synapse-secret.age".publicKeys = [ surt surt-sshd ];
 }

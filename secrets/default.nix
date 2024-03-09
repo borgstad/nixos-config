@@ -16,4 +16,10 @@ in
     owner = "root";
     group = "root";
   };
+  age.secrets.matrix-synapse-secret = {
+    file = ./matrix-synapse-secret.age;
+    owner = "turnserver";
+    group = "turnserver";
+  };
+
 }

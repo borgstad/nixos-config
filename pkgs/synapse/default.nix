@@ -39,7 +39,7 @@
     enable = true;
     lt-cred-mech = true;
     use-auth-secret = true;
-    static-auth-secret = "<shared-secret>";
+    static-auth-secret = builtins.readFile config.age.secrets.matrix-synapse-secret.path;
     realm = "turn.borgstad.dk";
     no-tcp-relay = true;
     extraConfig = "
