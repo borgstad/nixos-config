@@ -18,7 +18,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, agenix, vscode-server, ... }:
+  outputs = inputs@{ self, nixpkgs, agenix, gitwatch, vscode-server, ... }:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
