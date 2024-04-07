@@ -82,4 +82,11 @@ with lib;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
+
+  services.gitwatch.emacs-configs = {
+    enable = true;
+    path = "/home/surt/syncthing/various-config/";
+    remote = "git@github.com:borgstad/various-config";
+    user = "gimle";
+  };
 }
