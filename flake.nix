@@ -6,10 +6,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "nixpkgs/nixos-23.11";
     agenix.url = "github:ryantm/agenix";
-    gitwatch = {
-      url = "github:borgstad/gitwatch";
-      ref = "fix/nix-flake";
-    };
+    gitwatch.url = "github:borgstad/gitwatch/fix/nix-flake";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     ssh-keys-andreas = {
       url = "https://github.com/borgstad.keys";

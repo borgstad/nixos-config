@@ -58,9 +58,8 @@
         "type": "github"
       },
       "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
+        "id": "flake-utils",
+        "type": "indirect"
       }
     },
     "flake-utils_2": {
@@ -83,23 +82,20 @@
     },
     "gitwatch": {
       "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1703441749,
-        "narHash": "sha256-0j1akFFrI7A0v0F87QUFCBCO2fS7Jb+GLrOtpFRxj7I=",
-        "owner": "ein-shved",
+        "lastModified": 1712506005,
+        "narHash": "sha256-R9q9ez5zw63o50DdzmdapauMghZM+y93f567OIUQKoY=",
+        "owner": "borgstad",
         "repo": "gitwatch",
-        "rev": "68deddcea045f7af681daa226bfe0a3d97daa193",
+        "rev": "8e4d82fb9d4039e3d45c583112975b2bc60bef66",
         "type": "github"
       },
       "original": {
-        "owner": "ein-shved",
+        "owner": "borgstad",
+        "ref": "fix/nix-flake",
         "repo": "gitwatch",
         "type": "github"
       }
@@ -127,6 +123,20 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1712449641,
+        "narHash": "sha256-U9DDWMexN6o5Td2DznEgguh8TRIUnIl9levmit43GcI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "600b15aea1b36eeb43833a50b0e96579147099ff",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1712437997,
         "narHash": "sha256-g0whLLwRvgO2FsyhY8fNk+TWenS3jg5UdlWL4uqgFeo=",
         "owner": "NixOS",
@@ -140,7 +150,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1682134069,
         "narHash": "sha256-TnI/ZXSmRxQDt2sjRYK/8j8iha4B4zP2cnQCZZ3vp7k=",
@@ -154,37 +164,11 @@
         "type": "indirect"
       }
     },
-    "nvchad": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1704915228,
-        "narHash": "sha256-NIuKED6j75O0LQHa9gQWU9GS8FuGfVUUG+OJ2nwulD0=",
-        "owner": "ein-shved",
-        "repo": "NvChad",
-        "rev": "b25cf4807134b8795d51d46e90df5f0f3af080aa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ein-shved",
-        "ref": "v2.0",
-        "repo": "NvChad",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "flake-utils": "flake-utils",
         "gitwatch": "gitwatch",
-        "nixpkgs": "nixpkgs",
-        "nvchad": "nvchad",
+        "nixpkgs": "nixpkgs_2",
         "ssh-keys-andreas": "ssh-keys-andreas",
         "ssh-keys-mihi": "ssh-keys-mihi",
         "vscode-server": "vscode-server"
@@ -262,7 +246,7 @@
     "vscode-server": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1709622318,

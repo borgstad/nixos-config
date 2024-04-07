@@ -56,8 +56,8 @@ with lib;
     ../pkgs/tmux
     ../pkgs/vs-code
     ../pkgs/xserver
-    inputs.gitwatch.packages
-  ]; # ++ inputs.gitwatch.packages;
+    # inputs.gitwatch.modules
+  ] ++ inputs.gitwatch.modules;
   nixpkgs.config.allowUnfree = true;
 
   services.borgstadSyncthing = {
@@ -83,10 +83,10 @@ with lib;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
-  gitwatch.services.emacs-configs = {
+  services.gitwatch.gitwatch-emacs-configs = {
     enable = true;
     path = "/home/surt/syncthing/various-config/";
-    remote = "git@github.com:borgstad/various-config";
-    user = "gimle";
+    remote = "git@github.com:borgstad/various-config.git";
+    user = "surt";
   };
 }
