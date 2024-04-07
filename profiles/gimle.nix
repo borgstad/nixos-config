@@ -63,7 +63,6 @@ with lib;
     enable = true;
     user = "surt";
   };
-  # inputs.sometest.services.autobrr.enable = true;
 
   users.borgstadUser.surt = {
     isAdmin = true;
@@ -83,7 +82,7 @@ with lib;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
-  services.gitwatch.emacs-configs = {
+  inputs.gitwatch.emacs-configs = {
     enable = true;
     path = "/home/surt/syncthing/various-config/";
     remote = "git@github.com:borgstad/various-config";
