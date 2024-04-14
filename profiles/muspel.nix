@@ -12,6 +12,7 @@ with lib;
     curl
     direnv
     element-desktop
+    # emacs29
     firefox
     gcc
     gitAndTools.gitFull
@@ -26,6 +27,7 @@ with lib;
     nix-prefetch-scripts
     openssl
     python310
+    (python310.withPackages(ps: with ps; [ pandas requests tabulate ]))
     spotify
     sqlite
     stdenv
