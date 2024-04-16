@@ -5,6 +5,7 @@
     # App inputs
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
     gitwatch.url = "github:borgstad/gitwatch/fix/nix-flake";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +19,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, agenix, gitwatch, vscode-server, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, agenix, gitwatch, vscode-server, ... }:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
