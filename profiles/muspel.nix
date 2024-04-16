@@ -13,6 +13,9 @@ with lib;
     direnv
     element-desktop
     # emacs29
+    # (import inputs.nixpkgs-unstable {}).emacs
+    # (import inputs.nixpkgs-unstable {}).emacs
+    inputs.nixpkgs-unstable.legacyPackages.${system}.emacs
     firefox
     gcc
     gitAndTools.gitFull
@@ -26,8 +29,8 @@ with lib;
     mkpasswd
     nix-prefetch-scripts
     openssl
-    python310
-    (python310.withPackages(ps: with ps; [ pandas requests tabulate ]))
+    # python310
+    (python310.withPackages(ps: with ps; [ pandas requests tabulate matplotlib ]))
     spotify
     sqlite
     stdenv
@@ -51,7 +54,7 @@ alacritty
     ../modules/syncthing
     ../modules/users/standard-user.nix
     ../pkgs/zsh
-    ../pkgs/emacs
+    # ../pkgs/emacs
     ../pkgs/ssh-server
     ../pkgs/tmux
     ../pkgs/vs-code
@@ -66,10 +69,10 @@ alacritty
   users.borgstadUser.muspel = {
     isAdmin = true;
   };
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
+  systemd.targets.sleep.enable = true;
+  systemd.targets.suspend.enable = true;
+  systemd.targets.hibernate.enable = true;
+  systemd.targets.hybrid-sleep.enable = true;
   services.vnstat.enable = true;
   users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = [ "nix-command flakes" ];
@@ -79,5 +82,4 @@ alacritty
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-
 }
