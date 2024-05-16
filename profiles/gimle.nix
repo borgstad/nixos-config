@@ -20,6 +20,7 @@ with lib;
     htop
     mkpasswd
     nix-prefetch-scripts
+    texlive.combined.scheme-full
     openssl
     python310
     stdenv
@@ -87,5 +88,10 @@ with lib;
     path = "/home/surt/syncthing/various-config/";
     remote = "git@github.com:borgstad/various-config.git";
     user = "surt";
+  };
+  services.calibre-web = {
+    enable = true;
+    listen.port = 8083;
+    openFirewall = true;
   };
 }
