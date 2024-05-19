@@ -21,6 +21,8 @@ with lib;
     gnupg
     gitAndTools.gitFull
     gnumake
+    texlive.combined.scheme-full
+    evince
     graphviz
     htop
     hunspell
